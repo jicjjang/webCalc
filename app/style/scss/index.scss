@@ -3,129 +3,184 @@
 $header-height: 40px;
 $screen-height: 74px;
 
-html, body {
-  @include mobile {
-    height: 100%;
-  }
+html, body, article {
+  height: 100%;
 }
 
 body {
+  width: 100%;
   margin: 0;
   padding: 0;
   color: #b0b0b0;
-  @include mobile {
-    width: 100%;
-  }
-
-  @include desktop {
-    position:absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    width: $pc-calc-width;
-    margin: 0 auto;
-  }
 }
 
-main {  
-  @include mobile {
-    height: 100%;
+article {
+  opacity: 0;
+  -webkit-transition: opacity .8s ease-in-out;
+  -moz-transition: opacity .8s ease-in-out;
+  -ms-transition: opacity .8s ease-in-out;
+  -o-transition: opacity .8s ease-in-out;
+  transition: opacity .8s ease-in-out;
+  &.activate {
+    display: flex;
+    opacity: 1;
   }
-  @include desktop {
-    padding-bottom: 15px;
+  &:nth-child(1) {
+    align-items: center;
+    justify-content: center;
   }
-  @include gradientSet(#333333, #1F1F1F);
-  background-color: #333333;
-  border-radius: 5px;
-  box-shadow: 0px 3px 10px #888888;
-  header {
-    height: $header-height;
-    section {
-      position: absolute;
-      margin: 12px 0 0 10px;
-      button {
-        width: 15px;
-        height: 15px;
-        margin-right: 6px;
-        border-radius: 15px;
-        border: 1px solid #2E2F2D;
-        &:focus {
-          outline: 0;
-        }
-        &:hover {
-          cursor: pointer;
-        }
-        &:nth-child(1) {
-          @include gradientSet(#EF7E80, #E86E71, #F7484A);
-          background-color: #FC625D;
-          &:active {
-            @include gradientSet(#7F2929, #EF7E80, #F7484A);
+  &:nth-child(2) {
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+  & > main {
+    @include mobile {
+      height: 100%;
+      min-height: 460px
+    }
+    @include desktop {
+      width: 362px;
+      padding-bottom: 15px;
+    }
+    @include gradientSet(#333333, #1F1F1F);
+    width: 100%;
+    background-color: #333333;
+    border-radius: 5px;
+    box-shadow: 0px 3px 10px #888888;
+    header {
+      height: $header-height;
+      section {
+        position: absolute;
+        margin: 12px 0 0 10px;
+        button {
+          width: 15px;
+          height: 15px;
+          margin-right: 6px;
+          border-radius: 15px;
+          border: 1px solid #2E2F2D;
+          vertical-align: top;
+          &:focus {
+            outline: 0;
+          }
+          &:hover {
+            cursor: pointer;
+          }
+          &:nth-child(1) {
+            @include gradientSet(#EF7E80, #E86E71, #F7484A);
+            position: relative;
+            background-color: #FC625D;
+            &:active {
+              @include gradientSet(#7F2929, #EF7E80, #F7484A);
+            }
+            &:hover:after {
+              content: 'X';
+              position: absolute;
+              top: 0;
+              left: 3px;
+              font-size: 10px;
+            }
+          }
+          &:nth-child(2) {
+            @include gradientSet(#F0D09C, #FAD595, #F9C977);
+            position: relative;
+            background-color: #FDBC40;
+            &:active {
+              @include gradientSet(#927C59, #F0D09C, #F9C977);
+            }
+            &:hover:after {
+              content: '-';
+              position: absolute;
+              top: -3px;
+              left: 3px;
+              font-size: 14px;
+            }
+          }
+          &:nth-child(3) {
+            @include gradientSet(#B2D896, #AFDD8D, #9CD570);
+            position: relative;
+            background-color: #34C749;
+            &:active {
+              @include gradientSet(#7CB054, #B2D896, #9CD570);
+            }
+            &:hover:after {
+              content: '+';
+              position: absolute;
+              top: -3px;
+              left: 2px;
+              font-size: 14px;
+            }
           }
         }
-        &:nth-child(2) {
-          @include gradientSet(#F0D09C, #FAD595, #F9C977);
-          background-color: #FDBC40;
-          &:active {
-            @include gradientSet(#927C59, #F0D09C, #F9C977);
-          }
-        }
-        &:nth-child(3) {
-          @include gradientSet(#B2D896, #AFDD8D, #9CD570);
-          background-color: #34C749;
-          &:active {
-            @include gradientSet(#7CB054, #B2D896, #9CD570);
-          }
-        }
+      }
+      & > div {
+        padding-top: 12px;
+        text-align: center;
       }
     }
     & > div {
-      padding-top: 12px;
+      @include gradientSet(#393939, #343434);
+      background-color: #343434;
+      height: $screen-height;
+      margin: 0 10px;
+      padding: 15px;
+      border: 1px solid #111111;
+      border-radius: 5px;
+      box-sizing: border-box;
+      span {
+        float: right;
+        font-size: 40px;
+        &:after {
+          content: '';
+          display: table;
+          clear: both;
+        }
+      }
+    }
+    table {
+      @include mobile {
+        @include calc(height, '100% - #{$header-height} - #{$screen-height}');
+      }
+      width: 100%;
       text-align: center;
+      border-spacing: 10px;
+      tr {
+        height: 56px;
+        td {
+          @include gradientSet(#373738, #2E2E2E);
+          background-color: #2F3030;
+          width: 75px;
+          padding: 10px;
+          border: 1px solid #1A1A1A;
+          border-radius: 5px;
+          font-size: 24px;
+          font-weight: 100;
+          &:hover {
+            cursor: pointer;
+          }
+          &:active {
+            @include gradientSet(#1F1F1F, #353535, #333333);
+            background-color: #272727;
+            cursor: pointer;
+          }
+        }
+        &:nth-child(4) {
+          td:nth-child(4) {
+            vertical-align: top;
+            padding-top: 24px;
+          }
+        }
+      }
     }
   }
   & > div {
-    @include gradientSet(#393939, #343434);
-    background-color: #343434;
-    height: $screen-height;
-    margin: 0 10px;
-    border: 1px solid #111111;
-    border-radius: 5px;
+    width: 68px;
+    height: 40px;
+    padding: 12px;
+    background-color: #323232;
+    border-radius: 3px;
     box-sizing: border-box;
-  }
-  table {
-    @include mobile {
-      @include calc(height, '100% - #{$header-height} - #{$screen-height}');
-    }
-    width: 100%;
-    text-align: center;
-    border-spacing: 10px;
-    tr {
-      height: 56px;
-      td {
-        @include gradientSet(#373738, #2E2E2E);
-        background-color: #2F3030;
-        width: 75px;
-        padding: 10px;
-        border: 1px solid #1A1A1A;
-        border-radius: 5px;
-        font-size: 24px;
-        font-weight: 100;
-        &:hover {
-          cursor: pointer;
-        }
-        &:active {
-          @include gradientSet(#1F1F1F, #353535, #333333);
-          background-color: #272727;
-          cursor: pointer;
-        }
-      }
-      &:nth-child(4) {
-        td:nth-child(4) {
-          vertical-align: top;
-          padding-top: 24px;
-        }
-      }
+    &:hover {
+      cursor: pointer;
     }
   }
 }
-

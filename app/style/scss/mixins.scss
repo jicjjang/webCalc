@@ -1,5 +1,4 @@
 $boundary-width: 600px;
-$pc-calc-width: 362px;
 
 @mixin mobile {
   @media screen and (max-width: #{$boundary-width}) {

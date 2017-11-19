@@ -1,10 +1,6 @@
 # webCalc
 
-## 계산기 구현
-
----
-
-### Review
+### 계산기 구현 Review
 
 
 #### Calc Spec

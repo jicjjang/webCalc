@@ -64,7 +64,7 @@ function getResults(screenData, datas) {
   }
   var result = eval(datas.frontValue + datas.sign + datas.backValue); // 계산
   result = isNaN(result) || result === Infinity ? 0 : result; // 필터링
-  result = getDecimalPoint(result);  // 실수 체크
+  result = getDecimalPoint(result);  // 소숫점 체크
   result = addPointInValue(result);  // 콤마 추가
 
   return result;

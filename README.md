@@ -2,6 +2,7 @@
 
 ### 계산기 구현 Review
 
+![Calculator](./app/app.jpg)
 
 #### Calc Spec
 

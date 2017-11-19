@@ -3,7 +3,21 @@
 $header-height: 40px;
 $screen-height: 74px;
 
-html, body, article {
+$pc-calc-width: 362px;
+$pc-calc-height: 444px;
+
+@keyframes stretch {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(.1);
+    left: -362px;
+    top: 100%;
+  }
+}
+
+html, body {
   height: 100%;
 }
 
@@ -12,26 +26,38 @@ body {
   margin: 0;
   padding: 0;
   color: #b0b0b0;
+  overflow-y: hidden;
 }
 
 article {
-  opacity: 0;
-  -webkit-transition: opacity .8s ease-in-out;
-  -moz-transition: opacity .8s ease-in-out;
-  -ms-transition: opacity .8s ease-in-out;
-  -o-transition: opacity .8s ease-in-out;
-  transition: opacity .8s ease-in-out;
-  &.activate {
-    display: flex;
-    opacity: 1;
+  position: absolute;
+  &.activating {
+    &:nth-child(1) {
+      animation-name: stretch;
+      animation-duration: .9s;
+      animation-timing-function: ease-out;
+      animation-delay: 0;
+    }
   }
   &:nth-child(1) {
-    align-items: center;
-    justify-content: center;
+    @include mobile {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    @include desktop {
+      left: calc((100% - #{$pc-calc-width}) / 2);
+      top: calc((100% - #{$pc-calc-height}) / 2);
+      // transform: translate(-50%, -50%);
+    };
+    &.activating {
+      // transform: translate(0, 0);
+    }
   }
   &:nth-child(2) {
-    align-items: flex-end;
-    justify-content: flex-start;
+    display: none;
+    bottom: 0;
   }
   & > main {
     @include mobile {
@@ -39,7 +65,7 @@ article {
       min-height: 460px
     }
     @include desktop {
-      width: 362px;
+      width: $pc-calc-width;
       padding-bottom: 15px;
     }
     @include gradientSet(#333333, #1F1F1F);
@@ -126,14 +152,15 @@ article {
       border: 1px solid #111111;
       border-radius: 5px;
       box-sizing: border-box;
+      font-size: 40px;
+      word-wrap: break-word;
+      overflow-y: scroll;
       span {
-        float: right;
-        font-size: 40px;
-        &:after {
-          content: '';
-          display: table;
-          clear: both;
-        }
+        display: inline-block;
+        width: 100%;
+        max-height: 95px;
+        overflow: hidden;
+        text-align: right;
       }
     }
     table {
@@ -144,7 +171,6 @@ article {
       text-align: center;
       border-spacing: 10px;
       tr {
-        height: 56px;
         td {
           @include gradientSet(#373738, #2E2E2E);
           background-color: #2F3030;
@@ -175,7 +201,7 @@ article {
   & > div {
     width: 68px;
     height: 40px;
-    padding: 12px;
+    padding: 10px;
     background-color: #323232;
     border-radius: 3px;
     box-sizing: border-box;
